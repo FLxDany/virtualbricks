@@ -1,4 +1,4 @@
-import StringIO
+import six 
 import textwrap
 
 from zope.interface import implementer
@@ -23,7 +23,7 @@ class FileTransportAdapter:
 
     loseConnection = getPeer = getHost = lambda s: None
 
-components.registerAdapter(FileTransportAdapter, StringIO.StringIO,
+components.registerAdapter(FileTransportAdapter, six.StringIO,
                            interfaces.ITransport)
 
 
@@ -31,7 +31,7 @@ class TestProtocol(unittest.TestCase):
 
     def setUp(self):
         self.factory = stubs.FactoryStub()
-        self.stdout = StringIO.StringIO()
+        self.stdout = six.StringIO()
 
     def parse(self, cmd):
         console.parse(self.factory, cmd, self.stdout)

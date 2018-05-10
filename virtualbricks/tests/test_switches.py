@@ -3,6 +3,8 @@ import os
 from virtualbricks import switches, errors, settings
 from virtualbricks.tests import unittest, stubs
 
+settings.load()
+
 
 class TestSwitch(unittest.TestCase):
 
