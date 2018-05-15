@@ -106,7 +106,7 @@ class TestDeploymentGuiDataFiles(unittest.TestCase):
             data_path=GUI_DATA_PATH,
             filename=datafile,
             name=NORMALIZE_RE.sub("_", datafile))
-        exec test_definition
+        exec (test_definition)
 
 
 @skipUnless(should_test_deployment(), "deployment tests are not enabled")
@@ -118,7 +118,7 @@ class TestDeploymentTestDataFiles(unittest.TestCase):
             data_path=TEST_DATA_PATH,
             filename=datafile,
             name=NORMALIZE_RE.sub("_", datafile))
-        exec test_definition
+        exec (test_definition)
 
 
 @skipUnless(should_test_deployment(), "deployment tests are not enabled")
@@ -128,7 +128,7 @@ class TestDeploymentScripts(unittest.TestCase):
         test_definition = _script_test_template.format(
             filename=script,
             name=NORMALIZE_RE.sub("_", script))
-        exec test_definition
+        exec (test_definition)
 
 
 def is_py_file(filename):
@@ -168,4 +168,4 @@ class TestDeploymentDataFilesNotTested(unittest.TestCase):
                 test_definition = _all_data_template.format(
                     filename=os.path.join(dirpath, filename),
                     name=NORMALIZE_RE.sub("_", filename))
-                exec test_definition
+                exec (test_definition)

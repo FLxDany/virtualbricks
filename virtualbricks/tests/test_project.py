@@ -1,4 +1,4 @@
-import StringIO
+import six
 import operator
 
 from twisted.trial import unittest
@@ -394,7 +394,7 @@ class PseudoOrderedDict(dict):
 class TestProjectEntry(unittest.TestCase):
 
     def setUp(self):
-        fp = StringIO.StringIO(PROJECT)
+        fp = six.StringIO(PROJECT)
         self.entry = project.ProjectEntry.from_fileobj(fp)
 
     def test_get_images(self):
@@ -442,6 +442,6 @@ class TestProjectEntry(unittest.TestCase):
             ]),
         }
         links = [("link", "sender", "sw1", "rtl8139", "00:11:22:33:44:55")]
-        sio = StringIO.StringIO()
+        sio = six.StringIO()
         project.ProjectEntry(sections, links).dump(sio)
         self.assertEquals(sio.getvalue(), PROJECT)
