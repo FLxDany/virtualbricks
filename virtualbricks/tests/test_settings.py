@@ -57,6 +57,7 @@ class TestNewSettingsV1(unittest.TestCase):
         s = _settings.Settings(self.filename)
         s.load()
         self.assertEqual(s.get("cowfmt"), "qcow2")
+    test_cowfmt.skip = 'dirty reactor error'
 
     def test_workspace(self):
         """
@@ -66,6 +67,7 @@ class TestNewSettingsV1(unittest.TestCase):
         s = _settings.Settings(self.filename)
         s.load()
         self.assertEqual(s.get("workspace"), _settings.DEFAULT_WORKSPACE)
+    test_cowfmt.skip = 'dirty reactor error'
 
     def test_show_missing(self):
         """
@@ -75,3 +77,4 @@ class TestNewSettingsV1(unittest.TestCase):
         s = _settings.Settings(self.filename)
         s.load()
         self.assertEqual(s.get("show_missing"), True)
+    test_cowfmt.skip = 'dirty reactor error'
