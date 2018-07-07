@@ -22,9 +22,8 @@ import textwrap
 from twisted.internet import interfaces, utils
 from twisted.protocols import basic
 from zope.interface import implementer
-
 from virtualbricks import __version__, bricks, errors, log, settings
-
+import six
 
 logger = log.Logger()
 socket_error = log.Event("Error on socket")
@@ -106,11 +105,12 @@ class Protocol(basic.LineOnlyReceiver):
         pass
 
     def connectionMade(self):
-        for protocol in self.sub_protocols.itervalues():
+        for protocol in six.itervalues(self.sub_protocols):
             protocol.makeConnection(self.transport)
+        
 
     def connectionLost(self, reason):
-        for protocol in self.sub_protocols.itervalues():
+        for protocol in six.itervalues(self.sub_protocols):
             protocol.connectionLost(reason)
 
 
@@ -213,7 +213,8 @@ class VBProtocol(Protocol):
         logger.info(quit_loop)
 
     def do_help(self):
-        self.sendLine(textwrap.dedent(self.__doc__))
+        line = textwrap.dedent(self.__doc__)
+        self.sendLine(line)
 
     def do_event(self, name, *args):
         event = self.factory.get_event_by_name(name)
@@ -252,7 +253,7 @@ class VBProtocol(Protocol):
         else:
             try:
                 self.factory.new_brick(typ, name)
-            except (errors.InvalidTypeError, errors.InvalidNameError), e:
+            except (errors.InvalidTypeError, errors.InvalidNameError) as e:
                 self.sendLine(str(e))
 
     def do_list(self):
