@@ -1085,7 +1085,7 @@ class QemuConfigController(ConfigController):
         d.addErrback(close_panel)
 
         #panel = Gtk.Alignment(0.5, 0.5) new default values for xscale and yscale are 1, before : 0
-	panel = Gtk.Alignment(0.5, 0.5, 0.0, 0.0)
+        panel = Gtk.Alignment(0.5, 0.5, 0.0, 0.0)
         label = Gtk.Label("Loading configuration...")
         panel.add(label)
         panel.show_all()
